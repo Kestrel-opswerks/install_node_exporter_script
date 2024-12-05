@@ -12,7 +12,7 @@ EXTRACT_DIR="${TAR_FILE%.tar.gz}"
 
 wget -q --show-progress "$URL"
 
-tar -xzvf "$TAR_FILE"
+tar -xzf "$TAR_FILE"
 
 cd "$EXTRACT_DIR"
 
@@ -43,4 +43,9 @@ sudo systemctl daemon-reload
 
 sudo systemctl enable --now node_exporter 
 
-sudo systemctl status node_exporter 
+SERVICE="node_exporter"
+if systemctl is-active --quiet "$SERVICE"; then
+  echo "$SERVICE is running."
+else
+  echo "$SERVICE is not running."
+fi
